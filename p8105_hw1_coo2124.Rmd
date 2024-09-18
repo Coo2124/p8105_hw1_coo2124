@@ -3,3 +3,88 @@ title: "p8105_hw1_coo2124"
 output: github_document
 ---
 
+## PROBLEM 1
+
+Install and Load Package
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+
+Inline R Code to Describe the Dataset
+
+The `penguins` dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns, representing data on penguins. The important variables include `species` (the species of the penguin), `island` (the island where the penguin was observed), `bill_length_mm` (the length of the penguin's bill), `flipper_length_mm` (the length of the penguin's flipper), and `body_mass_g` (the body mass of the penguin in grams).
+
+The average flipper length across all penguins is `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
+
+
+## Create a scatterplot of flipper length vs bill length:
+
+```{r}
+library(ggplot2)
+
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) +
+  geom_point() +
+  labs(
+    title = "Scatterplot of Flipper Length vs Bill Length",
+    x = "Bill Length (mm)",
+    y = "Flipper Length (mm)",
+    color = "Species"
+  ) +
+  theme_minimal()
+```
+
+## Export scatterplot using ggsave
+
+```{r}
+ggsave("flipper_vs_bill_scatterplot.png")
+```
+
+
+## PROBLEM 2
+
+Create a data frame
+
+```{r}
+library(tidyverse)
+
+df <- data.frame(
+  normal_sample = rnorm(10),                          
+  logical_vector = rnorm(10) > 0,                      
+  character_vector = rep(c("a", "b", "c", "d"), length.out = 10),  
+  factor_vector = factor(rep(c("low", "medium", "high"), length.out = 10))  
+)
+
+df
+```
+
+ mean of each variable in the dataframe
+ 
+```{r}
+mean(df$normal_sample)        
+mean(df$logical_vector)        
+mean(df$character_vector)      
+mean(df$factor_vector)         
+```
+ 
+ ## What works and what doesn’t?
+ 
+The mean of normal_sample  worked because it's a numeric variable.
+The mean of logical_vector  worked because R coerces TRUE to 1 and FALSE to 0, allowing for the calculation of a numeric mean.
+The mean of character_vector did not work because the mean of a character vector can not be taken.
+The mean of factor_vector did not work because factors are categorical variables, not numeric.
+
+
+## code chunk that applies the as.numeric function to the logical, character, and factor variables
+```{r}
+as.numeric(df$logical_vector)
+as.numeric(df$character_vector)
+as.numeric(df$factor_vector)
+```
+
+## what happens when you try to take the mean?
+
+Logical variables converted to numeric, where TRUE becomes 1 and FALSE becomes 0.
+Character values cannot be directly converted to numbers, resulting in NA.
+Factors are internally stored as integers corresponding to their levels, which is why they can be converted to numeric values.
