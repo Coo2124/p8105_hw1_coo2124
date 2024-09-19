@@ -19,6 +19,11 @@ The `penguins` dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` c
 The average flipper length across all penguins is `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
 
 
+## the data in this dataset, including names / values of important variables
+```{r}
+str(penguins)
+```
+
 ## Create a scatterplot of flipper length vs bill length:
 
 ```{r}
