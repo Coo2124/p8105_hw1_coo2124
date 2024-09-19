@@ -54,7 +54,8 @@ Create a data frame
 ```{r}
 library(tidyverse)
 
-df <- data.frame(
+set.seed(123)
+df <- tibble(
   normal_sample = rnorm(10),                          
   logical_vector = rnorm(10) > 0,                      
   character_vector = rep(c("a", "b", "c", "d"), length.out = 10),  
@@ -83,9 +84,11 @@ The mean of factor_vector did not work because factors are categorical variables
 
 ## code chunk that applies the as.numeric function to the logical, character, and factor variables
 ```{r}
-as.numeric(df$logical_vector)
-as.numeric(df$character_vector)
-as.numeric(df$factor_vector)
+library(dplyr)
+
+as.numeric(df %>% pull(logical_vector))
+as.numeric(df %>% pull(character_vector))
+as.numeric(df %>% pull(factor_vector))
 ```
 
 ## what happens when you try to take the mean?
