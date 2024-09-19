@@ -68,10 +68,10 @@ df
  mean of each variable in the dataframe
  
 ```{r}
-mean(df$normal_sample)        
-mean(df$logical_vector)        
-mean(df$character_vector)      
-mean(df$factor_vector)         
+mean(df %>% pull(normal_sample))        
+mean(df %>% pull(logical_vector))        
+mean(df %>% pull(character_vector))     
+mean(df %>% pull(factor_vector))         
 ```
  
  ## What works and what doesn’t?
