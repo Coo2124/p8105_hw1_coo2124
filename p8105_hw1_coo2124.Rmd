@@ -8,7 +8,6 @@ output: github_document
 Install and Load Package
 
 ```{r}
-library(tidyverse)
 data("penguins", package = "palmerpenguins")
 ```
 
